@@ -4,15 +4,46 @@
     <meta charset="UTF-8">
     <title>게시글 목록</title>
     <link rel="stylesheet" href="/css/list.css">
-
 </head>
 <body>
 <div class="container">
+    <!-- 헤더 -->
     <header>
-        <h1>게시글 목록</h1>
-        <a href="/posts/new" class="button">글 작성</a>
+        <!-- 왼쪽: 사이트 이름 -->
+        <h1><a href="/" style="color:white; text-decoration:none;">My Tenco</a></h1>
+
+        <!-- 오른쪽: 메뉴 -->
+        <nav>
+            <!-- 로그인 안 된 상태 -->
+            {{^isLoggedIn}}
+                <a href="/login" class="button">로그인</a>
+                <a href="/signup" class="button">회원가입</a>
+            {{/isLoggedIn}}
+
+            <!-- 로그인 된 상태 -->
+            {{#isLoggedIn}}
+                <span style="color:white; margin-right:10px;">환영합니다, {{username}}님</span>
+                <a href="/logout" class="button">로그아웃</a>
+            {{/isLoggedIn}}
+        </nav>
     </header>
 
+    <!-- 검색바 -->
+    <div class="search-section">
+        <form action="/posts" method="get" class="search-form">
+            <input type="text" name="keyword" placeholder="제목 또는 내용으로 검색..." value="{{keyword}}">
+            <button type="submit" class="search-btn">🔍 검색</button>
+        </form>
+    </div>
+
+    <!-- 글 작성 버튼 -->
+    {{#isLoggedIn}}
+        <div class="post-action">
+            <a href="/posts/new" class="button create-btn">글 작성</a>
+        </div>
+    {{/isLoggedIn}}
+
+    <!-- 게시글 목록 -->
     <div class="post-list">
         {{#posts}}
             <div class="post-card">
@@ -21,6 +52,42 @@
                 <p class="snippet">{{content}}</p>
             </div>
         {{/posts}}
+
+        {{^posts}}
+            <div class="empty-state">
+                <div class="empty-state-icon">📝</div>
+                <p class="empty-state-text">게시글이 없습니다.</p>
+                {{#isLoggedIn}}
+                    <a href="/posts/new" class="button">첫 글 작성하기</a>
+                {{/isLoggedIn}}
+            </div>
+        {{/posts}}
+    </div>
+
+    <!-- 페이징 -->
+    <div class="pagination">
+        <!-- 이전 버튼 -->
+        {{#hasPrevious}}
+            <a href="/posts?page={{previousPage}}" class="page-btn prev-btn">← 이전</a>
+        {{/hasPrevious}}
+        {{^hasPrevious}}
+            <span class="page-btn prev-btn disabled">← 이전</span>
+        {{/hasPrevious}}
+
+        <!-- 페이지 번호 -->
+        <div class="page-numbers">
+            {{#pageNumbers}}
+                <a href="/posts?page={{number}}" class="page-number {{#active}}active{{/active}}">{{display}}</a>
+            {{/pageNumbers}}
+        </div>
+
+        <!-- 다음 버튼 -->
+        {{#hasNext}}
+            <a href="/posts?page={{nextPage}}" class="page-btn next-btn">다음 →</a>
+        {{/hasNext}}
+        {{^hasNext}}
+            <span class="page-btn next-btn disabled">다음 →</span>
+        {{/hasNext}}
     </div>
 </div>
 </body>

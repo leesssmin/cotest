@@ -5,7 +5,6 @@ spring:
     password: asd1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,6 +12,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    defer-datasource-initialization: true   # ← Hibernate 후 data.sql 실행
+
+  sql:
+    init:
+      mode: always
 
   thymeleaf:
     cache: false

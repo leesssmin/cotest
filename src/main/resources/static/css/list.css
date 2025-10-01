@@ -15,7 +15,7 @@ body {
 /* 컨테이너 */
 .container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
     background: white;
     border-radius: 20px;
@@ -76,13 +76,98 @@ header h1 {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* 검색 섹션 */
+.search-section {
+    padding: 30px 40px;
+    background: white;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.search-form {
+    display: flex;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-form input[type="text"] {
+    flex: 1;
+    padding: 14px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.search-form input[type="text"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.search-btn {
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.search-result {
+    text-align: center;
+    margin-top: 15px;
+    color: #4a5568;
+    font-size: 14px;
+}
+
+.search-result strong {
+    color: #667eea;
+    font-weight: 700;
+}
+
+/* 게시글 위 글 작성 버튼 */
+.post-action {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 40px 0 40px;
+}
+
+.post-action .create-btn {
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.post-action .create-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
 /* 게시글 리스트 */
 .post-list {
     padding: 40px;
     background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 25px;
+    min-height: 400px;
 }
 
 /* 게시글 카드 */
@@ -95,6 +180,7 @@ header h1 {
     cursor: pointer;
     position: relative;
     overflow: hidden;
+    width: 100%;
 }
 
 .post-card::before {
@@ -174,18 +260,103 @@ header h1 {
 }
 
 /* 빈 상태 */
-.post-list:empty::after {
-    content: '📝 작성된 게시글이 없습니다.';
+.empty-state {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     min-height: 300px;
-    font-size: 18px;
-    color: #a0aec0;
-    grid-column: 1 / -1;
+    text-align: center;
 }
 
-/* 카드 애니메이션 (순차적) */
+.empty-state-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+.empty-state-text {
+    font-size: 18px;
+    color: #a0aec0;
+    margin-bottom: 20px;
+}
+
+.empty-state .button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+/* 페이징 */
+.pagination {
+    padding: 30px 40px;
+    background: white;
+    border-top: 2px solid #e2e8f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.page-btn {
+    padding: 10px 20px;
+    background: white;
+    color: #667eea;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.page-btn:hover:not(.disabled) {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.page-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 8px;
+}
+
+.page-number {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #4a5568;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.page-number:hover {
+    background: #f8f9fa;
+    border-color: #cbd5e0;
+}
+
+.page-number.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+}
+
+/* 카드 애니메이션 */
 .post-card {
     animation: fadeInUp 0.5s ease-out backwards;
 }
@@ -236,9 +407,29 @@ header h1 {
         padding: 12px 20px;
     }
 
+    .search-section {
+        padding: 25px;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .post-action {
+        padding: 15px 25px 0 25px;
+    }
+
+    .post-action .create-btn {
+        width: 100%;
+        text-align: center;
+    }
+
     .post-list {
         padding: 25px;
-        grid-template-columns: 1fr;
         gap: 20px;
     }
 
@@ -248,6 +439,26 @@ header h1 {
 
     .post-card h2 {
         font-size: 18px;
+    }
+
+    .pagination {
+        padding: 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .page-numbers {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .prev-btn {
+        order: 1;
+    }
+
+    .next-btn {
+        order: 2;
     }
 }
 
@@ -279,13 +490,6 @@ header h1 {
     }
 }
 
-/* 태블릿 사이즈 */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .post-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 /* 텍스트 선택 색상 */
 ::selection {
     background: rgba(102, 126, 234, 0.3);
@@ -297,7 +501,7 @@ header h1 {
     color: #2d3748;
 }
 
-/* 스크롤바 스타일 (Webkit 브라우저) */
+/* 스크롤바 스타일 */
 body::-webkit-scrollbar {
     width: 12px;
 }
@@ -313,25 +517,4 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
-}
-
-/* 로딩 상태 (옵션) */
-@keyframes shimmer {
-    0% {
-        background-position: -1000px 0;
-    }
-    100% {
-        background-position: 1000px 0;
-    }
-}
-
-.post-card.loading {
-    background: linear-gradient(
-        90deg,
-        #f0f0f0 25%,
-        #e0e0e0 50%,
-        #f0f0f0 75%
-    );
-    background-size: 1000px 100%;
-    animation: shimmer 2s infinite;
 }

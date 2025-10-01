@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>{{post.title}}</title>
     <link rel="stylesheet" href="/css/detail.css">
-
 </head>
 <body>
 <div class="container">
@@ -21,6 +20,42 @@
         <form action="/posts/{{post.id}}/delete" method="post" style="margin-top: 10px;">
             <button type="submit" class="button delete">삭제</button>
         </form>
+    </div>
+
+    <!-- 리뷰 섹션 -->
+    <div class="review-section">
+        <h2 class="review-title">💬 댓글 ({{reviews.size}})</h2>
+
+        <!-- 리뷰 작성 폼 -->
+        <div class="review-form-card">
+            <form action="/posts/{{post.id}}/reviews" method="post">
+                <textarea name="content" placeholder="댓글을 작성해주세요..." rows="3" required></textarea>
+                <button type="submit" class="button review-submit">작성</button>
+            </form>
+        </div>
+
+        <!-- 리뷰 목록 -->
+        <div class="review-list">
+            {{#reviews}}
+                <div class="review-card">
+                    <div class="review-header">
+                        <span class="review-author">{{author}}</span>
+                        <span class="review-date">{{createdAt}}</span>
+                    </div>
+                    <p class="review-content">{{content}}</p>
+                    <form action="/posts/reviews/{{id}}/delete" method="post" class="review-delete-form">
+                        <input type="hidden" name="postId" value="{{post.id}}">
+                        <button type="submit" class="review-delete-btn">삭제</button>
+                    </form>
+                </div>
+            {{/reviews}}
+
+            {{^reviews}}
+                <div class="empty-review">
+                    <p>첫 번째 댓글을 작성해보세요! 🎉</p>
+                </div>
+            {{/reviews}}
+        </div>
     </div>
 </div>
 </body>
