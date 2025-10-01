@@ -1,0 +1,337 @@
+/* 전역 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+/* 컨테이너 */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 헤더 */
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+}
+
+/* 버튼 스타일 */
+.button {
+    padding: 12px 28px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    display: inline-block;
+}
+
+.button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 게시글 리스트 */
+.post-list {
+    padding: 40px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+/* 게시글 카드 */
+.post-card {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 15px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.post-card:hover::before {
+    transform: scaleX(1);
+}
+
+.post-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    border-color: #667eea;
+}
+
+/* 제목 */
+.post-card h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.post-card h2 a {
+    color: #2d3748;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: block;
+}
+
+.post-card:hover h2 a {
+    color: #667eea;
+}
+
+/* 작성자 */
+.author {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 0.2px;
+}
+
+.author::before {
+    content: '👤';
+    font-size: 14px;
+}
+
+/* 내용 미리보기 */
+.snippet {
+    color: #718096;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-top: 15px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+
+/* 빈 상태 */
+.post-list:empty::after {
+    content: '📝 작성된 게시글이 없습니다.';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    font-size: 18px;
+    color: #a0aec0;
+    grid-column: 1 / -1;
+}
+
+/* 카드 애니메이션 (순차적) */
+.post-card {
+    animation: fadeInUp 0.5s ease-out backwards;
+}
+
+.post-card:nth-child(1) { animation-delay: 0.1s; }
+.post-card:nth-child(2) { animation-delay: 0.15s; }
+.post-card:nth-child(3) { animation-delay: 0.2s; }
+.post-card:nth-child(4) { animation-delay: 0.25s; }
+.post-card:nth-child(5) { animation-delay: 0.3s; }
+.post-card:nth-child(6) { animation-delay: 0.35s; }
+.post-card:nth-child(n+7) { animation-delay: 0.4s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .container {
+        border-radius: 15px;
+    }
+
+    header {
+        padding: 25px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .button {
+        width: 100%;
+        text-align: center;
+        padding: 12px 20px;
+    }
+
+    .post-list {
+        padding: 25px;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .post-card {
+        padding: 25px;
+    }
+
+    .post-card h2 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 20px;
+    }
+
+    .post-list {
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .post-card {
+        padding: 20px;
+    }
+
+    .post-card h2 {
+        font-size: 16px;
+    }
+
+    .author {
+        font-size: 12px;
+        padding: 5px 12px;
+    }
+
+    .snippet {
+        font-size: 13px;
+    }
+}
+
+/* 태블릿 사이즈 */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .post-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 텍스트 선택 색상 */
+::selection {
+    background: rgba(102, 126, 234, 0.3);
+    color: #2d3748;
+}
+
+::-moz-selection {
+    background: rgba(102, 126, 234, 0.3);
+    color: #2d3748;
+}
+
+/* 스크롤바 스타일 (Webkit 브라우저) */
+body::-webkit-scrollbar {
+    width: 12px;
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* 로딩 상태 (옵션) */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.post-card.loading {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 25%,
+        #e0e0e0 50%,
+        #f0f0f0 75%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}

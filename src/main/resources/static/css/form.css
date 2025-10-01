@@ -1,0 +1,260 @@
+/* 전역 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* 컨테이너 */
+.container {
+    width: 100%;
+    max-width: 800px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 헤더 */
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+/* 버튼 공통 스타일 */
+.button {
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* 폼 카드 */
+.form-card {
+    padding: 50px 40px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+}
+
+/* 폼 스타일 */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 8px;
+    display: block;
+    letter-spacing: -0.2px;
+}
+
+/* 입력 필드 */
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #2d3748;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+    color: #a0aec0;
+}
+
+/* 텍스트영역 */
+textarea {
+    resize: vertical;
+    min-height: 200px;
+    line-height: 1.6;
+}
+
+/* 제출 버튼 */
+button[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    letter-spacing: 0.3px;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+}
+
+button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* 호버 효과 */
+input[type="text"]:hover,
+textarea:hover {
+    border-color: #cbd5e0;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        border-radius: 15px;
+    }
+
+    header {
+        padding: 20px 25px;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .form-card {
+        padding: 30px 25px;
+    }
+
+    form {
+        gap: 20px;
+    }
+
+    input[type="text"],
+    textarea {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+    textarea {
+        min-height: 150px;
+    }
+
+    button[type="submit"] {
+        padding: 14px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 20px;
+    }
+
+    .form-card {
+        padding: 25px 20px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+}
+
+/* 로딩 상태 (옵션) */
+button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 포커스 시 라벨 강조 */
+input[type="text"]:focus + label,
+textarea:focus + label {
+    color: #667eea;
+}
+
+/* 입력 필드 애니메이션 */
+input[type="text"],
+textarea {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 그림자 효과 */
+.form-card {
+    position: relative;
+}
+
+.form-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(102, 126, 234, 0.3),
+        transparent
+    );
+}

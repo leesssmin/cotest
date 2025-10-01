@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 목록</title>
+    <link rel="stylesheet" href="/css/list.css">
+
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>게시글 목록</h1>
+        <a href="/posts/new" class="button">글 작성</a>
+    </header>
+
+    <div class="post-list">
+        {{#posts}}
+            <div class="post-card">
+                <h2><a href="/posts/{{id}}">{{title}}</a></h2>
+                <p class="author">작성자: {{author}}</p>
+                <p class="snippet">{{content}}</p>
+            </div>
+        {{/posts}}
+    </div>
+</div>
+</body>
+</html>

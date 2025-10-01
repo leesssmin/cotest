@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{post.title}}</title>
+    <link rel="stylesheet" href="/css/detail.css">
+
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>{{post.title}}</h1>
+        <a href="/posts" class="button">목록</a>
+        <a href="/posts/{{post.id}}/edit" class="button">수정</a>
+    </header>
+
+    <div class="post-card">
+        <p class="author">작성자: {{post.author}}</p>
+        <p class="snippet">{{post.content}}</p>
+
+        <form action="/posts/{{post.id}}/delete" method="post" style="margin-top: 10px;">
+            <button type="submit" class="button delete">삭제</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
